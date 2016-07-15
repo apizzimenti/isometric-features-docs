@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>world/player.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Animal.html">Animal</a><ul class='methods'><li data-type='method'><a href="Animal.html#isVisible">isVisible</a></li><li data-type='method'><a href="Animal.html#listen">listen</a></li><li data-type='method'><a href="Animal.html#pathfind">pathfind</a></li><li data-type='method'><a href="Animal.html#timedMovement">timedMovement</a></li></ul></li><li><a href="contextMenu.html">contextMenu</a><ul class='methods'><li data-type='method'><a href="contextMenu.html#createContextMenu">createContextMenu</a></li></ul></li><li><a href="Debug.html">Debug</a><ul class='methods'><li data-type='method'><a href="Debug.html#fps">fps</a></li><li data-type='method'><a href="Debug.html#mousePos">mousePos</a></li><li data-type='method'><a href="Debug.html#sprite">sprite</a></li><li data-type='method'><a href="Debug.html#switch">switch</a></li><li data-type='method'><a href="Debug.html#tiles">tiles</a></li></ul></li><li><a href="Inventory.html">Inventory</a><ul class='methods'><li data-type='method'><a href="Inventory.html#addItem">addItem</a></li><li data-type='method'><a href="Inventory.html#addItems">addItems</a></li><li data-type='method'><a href="Inventory.html#click">click</a></li><li data-type='method'><a href="Inventory.html#onClick">onClick</a></li><li data-type='method'><a href="Inventory.html#placeItem">placeItem</a></li><li data-type='method'><a href="Inventory.html#reset">reset</a></li></ul></li><li><a href="Item.html">Item</a><ul class='methods'><li data-type='method'><a href="Item.html#action">action</a></li><li data-type='method'><a href="Item.html#threeDInitialize">threeDInitialize</a></li></ul></li><li><a href="Map.html">Map</a><ul class='methods'><li data-type='method'><a href="Map.html#createTileMap">createTileMap</a></li></ul></li><li><a href="Message.html">Message</a><ul class='methods'><li data-type='method'><a href="Message.html#add">add</a></li><li data-type='method'><a href="Message.html#display">display</a></li><li data-type='method'><a href="Message.html#format">format</a></li></ul></li><li><a href="Mouse.html">Mouse</a><ul class='methods'><li data-type='method'><a href="Mouse.html#reset">reset</a></li><li data-type='method'><a href="Mouse.html#selected">selected</a></li><li data-type='method'><a href="Mouse.html#update">update</a></li></ul></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method'><a href="Player.html#visionRadius">visionRadius</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#createAnimals">createAnimals</a></li><li><a href="global.html#determineBounds">determineBounds</a></li><li><a href="global.html#determineTileRadius">determineTileRadius</a></li><li><a href="global.html#dim">dim</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#globals">globals</a></li><li><a href="global.html#isInBounds">isInBounds</a></li><li><a href="global.html#keymap">keymap</a></li><li><a href="global.html#keymapTrack">keymapTrack</a></li><li><a href="global.html#manipulateDirection">manipulateDirection</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">world/player.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by apizzimenti on 5/19/16.
+ */
+
+"use strict";
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Player object.
+ *
+ * @param game {object} Current game instance.
+ * @param row {number} Initial row.
+ * @param col {number} Initial column.
+ * @param keys {string[]} Cached Phaser texture IDs to be assigned.
+ * @param group {object} Phaser group.
+ * @param map {Map} This game's Map object.
+ *
+ * @property game {object} Current game instance.
+ * @property sprite {sprite} Phaser isoSprite.
+ *
+ * @property sprite.tile {object} Empty object that, on direction initialization, will be populated.
+ * @property sprite.tile.center {sprite} Center tile.
+ * @property sprite.tile.top {sprite} Tile to the relative top.
+ * @property sprite.tile.left {sprite} Tile to the relative left.
+ * @property sprite.tile.bottom {sprite} Tile to the relative bottom.
+ * @property sprite.tile.right {sprite} Tile to the relative right.
+ *
+ * @property map {Map} This game's Map object.
+ * @property row {number} Current tile row.
+ * @property col {number} Current tile number.
+ *
+ * @class {object} Player
+ * @this Player
+ * @constructor
+ *
+ * @see Animal
+ * @see direction
+ * @see globals
+ */
+
+function Player (game, row, col, keys, group, map) {
+    
+    this.type = "player";
+    this.map = map;
+
+    var x = row * this.map.tileSize,
+        y = col * this.map.tileSize;
+
+    this.game = game;
+    this.keys = keys;
+
+    // initialize the isosprite and set the game's anchor
+    this.sprite = this.game.add.isoSprite(x, y, 0, keys[0], null, group);
+    this.sprite.anchor.set(...globals.anchor);
+    this.sprite.body.collideWorldBounds = true;
+
+    // camera follows this sprite
+    this.game.camera.follow(this.sprite);
+
+    this.sprite.direction = 0;
+    this.sprite.tile = {};
+
+    this.game.physics.isoArcade.enable(this.sprite);
+    this.sprite.body.bounce = new Phaser.Plugin.Isometric.Point3(0.5, 0.5, 0.5);
+
+    // initialize direction
+    direction(this);
+}
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Tracks the 3x3 vision radius of the Player, and changes tiles within that radius to "discovered".
+ *
+ * @this Player
+ */
+
+Player.prototype.visionRadius = function () {
+
+    var i,
+        j,
+        tile = {},
+        row = this.sprite.row,
+        col = this.sprite.col;
+
+    for (i = row - 1; i &lt; row + 2; i++) {
+        for (j = col - 1; j &lt; col + 2; j++) {
+            tile = this.map.tileMap[i][j];
+            tile.tint = 0xFFFFFF;
+            tile.discovered = true;
+        }
+    }
+};
+
+Player.prototype.float = function () {
+
+    this.sprite.isoZ = 5 + Math.sin(this.game.time.now * 0.005);
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Jul 15 2016 17:41:55 GMT-0500 (CDT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

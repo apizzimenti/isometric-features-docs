@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Animal.html">Animal</a><ul class='methods'><li data-type='method'><a href="Animal.html#isVisible">isVisible</a></li><li data-type='method'><a href="Animal.html#listen">listen</a></li><li data-type='method'><a href="Animal.html#pathfind">pathfind</a></li><li data-type='method'><a href="Animal.html#timedMovement">timedMovement</a></li></ul></li><li><a href="contextMenu.html">contextMenu</a><ul class='methods'><li data-type='method'><a href="contextMenu.html#createContextMenu">createContextMenu</a></li></ul></li><li><a href="Debug.html">Debug</a><ul class='methods'><li data-type='method'><a href="Debug.html#fps">fps</a></li><li data-type='method'><a href="Debug.html#mousePos">mousePos</a></li><li data-type='method'><a href="Debug.html#sprite">sprite</a></li><li data-type='method'><a href="Debug.html#switch">switch</a></li><li data-type='method'><a href="Debug.html#tiles">tiles</a></li></ul></li><li><a href="Inventory.html">Inventory</a><ul class='methods'><li data-type='method'><a href="Inventory.html#addItem">addItem</a></li><li data-type='method'><a href="Inventory.html#addItems">addItems</a></li><li data-type='method'><a href="Inventory.html#click">click</a></li><li data-type='method'><a href="Inventory.html#onClick">onClick</a></li><li data-type='method'><a href="Inventory.html#placeItem">placeItem</a></li><li data-type='method'><a href="Inventory.html#reset">reset</a></li></ul></li><li><a href="Item.html">Item</a><ul class='methods'><li data-type='method'><a href="Item.html#action">action</a></li><li data-type='method'><a href="Item.html#threeDInitialize">threeDInitialize</a></li></ul></li><li><a href="Map.html">Map</a><ul class='methods'><li data-type='method'><a href="Map.html#createTileMap">createTileMap</a></li></ul></li><li><a href="Message.html">Message</a><ul class='methods'><li data-type='method'><a href="Message.html#add">add</a></li><li data-type='method'><a href="Message.html#display">display</a></li><li data-type='method'><a href="Message.html#format">format</a></li></ul></li><li><a href="Mouse.html">Mouse</a><ul class='methods'><li data-type='method'><a href="Mouse.html#reset">reset</a></li><li data-type='method'><a href="Mouse.html#selected">selected</a></li><li data-type='method'><a href="Mouse.html#update">update</a></li></ul></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method'><a href="Player.html#visionRadius">visionRadius</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#createAnimals">createAnimals</a></li><li><a href="global.html#determineBounds">determineBounds</a></li><li><a href="global.html#determineTileRadius">determineTileRadius</a></li><li><a href="global.html#dim">dim</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#globals">globals</a></li><li><a href="global.html#isInBounds">isInBounds</a></li><li><a href="global.html#keymap">keymap</a></li><li><a href="global.html#keymapTrack">keymapTrack</a></li><li><a href="global.html#manipulateDirection">manipulateDirection</a></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h3>PlanetZ</h3><hr>
+<p>This project is part of the Innovations in Teaching with Technology Award to Sheila Barron. This project is comprised of
+many games, but this documentation refers to the Phaser Isometric tagging game.</p>
+<h3>Common Errors</h3><hr>
+<h4><code>tileset is attempting to enable a physics body with an unknown physics system.</code></h4><p>This error arises when the Isometric Plugin is incompatible with the version of Phaser that's installed. As of June 22,
+2016, the highest compatible Phaser version is v2.4.4 Amador. To install it, run <code>bower install Phaser#2.4.4</code>. bower will
+resolve the version, and present you with numbered options to install the versions it finds.</p>
+<h4><code>unexpected token &lt;token&gt;</code></h4><p>If you are using any ES6 features in Chrome, Firefox, or Safari, this error may arise. <code>&lt;token&gt;</code> can represent any variety
+of ES6 functionality pieces, including <code>import</code>, <code>export</code>, arrow functions, <code>const</code>, and many others. To resolve this,
+you can run a transpiler like Babel, or use the included gruntfile with <code>grunt babel</code>.</p>
+<p>If you are using Internet Explorer or Edge, please stop.</p>
+<h4><code>Uncaught TypeError: Cannot set property &lt;prop&gt; of undefined.</code></h4><p>This occurs most often with bad function scoping. For example:</p>
+<pre class="prettyprint source"><code>this = {
+    nice: 1,
+    awesome: 2,
+    kangaroo: 3,
+
+    say: function (something) {
+        console.log(&quot;Say &quot; + something + &quot; I'm giving up on you&quot;);
+    }
+};
+
+function set (prop) {
+    this.say(&quot;something&quot;);
+    // everything breaks here
+
+    ...
+}</code></pre><p>This is because JavaScript has lexical <em>and</em> function scoping, so <code>this</code> refers only to the current scope; the function
+<code>set</code> has no <code>say()</code> property, so it cannot be called.</p>
+<h4><code>Uncaught TypeError: Cannot read property &lt;num&gt; of undefined.</code></h4><p>This is an error with the physics system. If you find this bug, please report it immediately to one of the email addresses
+below. It may not happen every time, but it can happen sometimes.</p>
+<h3>Contact</h3><hr>
+<p>You can email the authors of this game at:</p>
+<p>cale-bierman@uiowa.edu</p>
+<p>anthony-pizzimenti@uiowa.edu</p>
+<p>derek-siebert@uiowa.edu</p>
+<p>steven-tomblin@uiowa.edu</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Jul 15 2016 17:41:55 GMT-0500 (CDT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
