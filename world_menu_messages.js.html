@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>world/player.js - Documentation</title>
+    <title>world/menu/messages.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -28,7 +28,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">world/player.js</h1>
+    <h1 class="page-title">world/menu/messages.js</h1>
     
 
     
@@ -38,105 +38,127 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Created by apizzimenti on 5/19/16.
+            <pre class="prettyprint source linenums"><code>(function () {"use strict";})();
+/**
+ * Created by apizzimenti on 7/15/16.
  */
 
-"use strict";
+
 
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Player object.
+ * @desc The Message structure handles all the popup messages in the game.
  *
- * @param game {object} Current game instance.
- * @param row {number} Initial row.
- * @param col {number} Initial column.
- * @param keys {string[]} Cached Phaser texture IDs to be assigned.
- * @param group {object} Phaser group.
- * @param map {Map} This game's Map object.
+ * @param game {object} Current Phaser game instance.
+ * @param y {number} Height of the game.
+ * @param size {number} Font size.
  *
- * @property game {object} Current game instance.
- * @property sprite {sprite} Phaser isoSprite.
+ * @property game {object} Phaser game instance.
+ * @property y {number} Height of the game.
+ * @property message {string | string[]} Message to be displayed.
+ * @property fontSize {number} Font size.
+ * @property style {object} Message styling.
+ * @property style.font {string} Font style.
+ * @property style.fill {string} Hexadecimal color value.
+ * @property alert {Signal} Signal.
  *
- * @property sprite.tile {object} Empty object that, on direction initialization, will be populated.
- * @property sprite.tile.center {sprite} Center tile.
- * @property sprite.tile.top {sprite} Tile to the relative top.
- * @property sprite.tile.left {sprite} Tile to the relative left.
- * @property sprite.tile.bottom {sprite} Tile to the relative bottom.
- * @property sprite.tile.right {sprite} Tile to the relative right.
- *
- * @property map {Map} This game's Map object.
- * @property row {number} Current tile row.
- * @property col {number} Current tile number.
- *
- * @class {object} Player
- * @this Player
+ * @class {object} Message
+ * @this Message
  * @constructor
- *
- * @see Animal
- * @see direction
- * @see globals
  */
 
-function Player (game, row, col, keys, group, map) {
-    
-    this.type = "player";
-    this.map = map;
-
-    var x = row * this.map.tileSize,
-        y = col * this.map.tileSize;
-
+function Message (game, y, size) {
     this.game = game;
-    this.keys = keys;
-
-    // initialize the isosprite and set the game's anchor
-    this.sprite = this.game.add.isoSprite(x, y, 0, keys[0], null, group);
-    this.sprite.anchor.set(...globals.anchor);
-    this.sprite.body.collideWorldBounds = true;
-
-    // camera follows this sprite
-    this.game.camera.follow(this.sprite);
-
-    this.sprite.direction = 0;
-    this.sprite.tile = {};
-
-    this.game.physics.isoArcade.enable(this.sprite);
-    this.sprite.body.bounce = new Phaser.Plugin.Isometric.Point3(0.5, 0.5, 0.5);
-
-    // initialize direction
-    direction(this);
+    this.y = y;
+    this.message = "";
+    this.fontSize = size;
+    this.style = {
+        font: size + "px Courier",
+        fill: "#FFFFFF"
+    };
+    
+    this.alert = new Phaser.Signal();
+    
+    this.alert.add(() => {this.display()});
 }
 
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Tracks the 3x3 vision radius of the Player, and changes tiles within that radius to "discovered".
+ * @desc Adds the provided message to the queue.
  *
- * @this Player
+ * @param message {string} Message to be added to the queue.
+ *
+ * @this Message
  */
 
-Player.prototype.visionRadius = function () {
-
-    var i,
-        j,
-        tile = {},
-        row = this.sprite.row,
-        col = this.sprite.col;
-
-    for (i = row - 1; i &lt; row + 2; i++) {
-        for (j = col - 1; j &lt; col + 2; j++) {
-            tile = this.map.tileMap[i][j];
-            tile.tint = 0xFFFFFF;
-            tile.discovered = true;
-        }
-    }
+Message.prototype.add = function (message) {
+    this.message = message;
+    this.alert.dispatch();
 };
 
-Player.prototype.float = function () {
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Displays the message on the screen for five seconds, with in and out tweens.
+ *
+ * @this Message
+ */
 
-    this.sprite.isoZ = 5 + Math.sin(this.game.time.now * 0.005);
-};</code></pre>
+Message.prototype.display = function () {
+    
+    var str = this.format(this.message);
+    
+    this.text = this.game.add.text(str.width, str.height, str.message, this.style);
+    
+    this.text.alpha = 0;
+    this.text.fixedToCamera = true;
+    
+    this.game.add.tween(this.text).to({alpha: 1}, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
+    
+    this.game.time.events.add(Phaser.Timer.SECOND * 5, () => {
+        this.game.add.tween(this.text).to({alpha: 0}, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
+    })
+};
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Formats messages so they are 60 characters wide.
+ *
+ * @param message {string} Message to be formatted.
+ *
+ * @returns {{width: number, height: number, message: string}} Width and height of Phaser message area; formatted string.
+ *
+ * @todo Format according to where words are, not just the 60th character.
+ */
+
+Message.prototype.format = function (message) {
+    var last = 0,
+        strs = [],
+        dist = message.length % 60 ? message.length - (message.length % 60) : 0;
+    
+    for (var i = 0; i &lt; message.length; i++) {
+        
+        if (!(i % 60) &amp;&amp; i !== 0) {
+            strs.push(message.slice(last, i) + "\n");
+            last = i;
+        } else if (dist === 0 &amp;&amp; i === message.length - 1) {
+            strs.push(message.slice(last, message.length));
+        } else if (i > dist &amp;&amp; dist !== 0) {
+            strs.push(message.slice(last, message.length));
+            break;
+        }
+    }
+    
+    return {
+        width: 10,
+        height: this.y - (strs.length * (this.fontSize * 1.8)),
+        message: strs.join(" ")
+    }
+};
+</code></pre>
         </article>
     </section>
 
