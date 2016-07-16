@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>world/player.js - Documentation</title>
+    <title>tools/mouse.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -28,7 +28,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">world/player.js</h1>
+    <h1 class="page-title">tools/mouse.js</h1>
     
 
     
@@ -39,104 +39,151 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Created by apizzimenti on 5/19/16.
+ * Created by apizzimenti on 7/15/16.
  */
 
-"use strict";
 
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Player object.
+ * @desc Game's mouse object.
  *
- * @param game {object} Current game instance.
- * @param row {number} Initial row.
- * @param col {number} Initial column.
- * @param keys {string[]} Cached Phaser texture IDs to be assigned.
- * @param group {object} Phaser group.
- * @param map {Map} This game's Map object.
+ * @param game {object} Current Phaser game instance.
+ * @param map {Map} Game's Map object.
+ * @param group {object} Sprite group.
  *
- * @property game {object} Current game instance.
- * @property sprite {sprite} Phaser isoSprite.
+ * @property game {object} Game instance this mouse belongs to.
+ * @property map {Map} Game's Map object.
+ * @property group {object} Sprite group.
+ * @property pos {object} Initial Isometric Point3.
+ * @property twoD {object} Phaser 2d pointer position.
+ * @property threeD {object} Derived 3d pointer position.
+ * @property switch {boolean} Is selected mode on or off?
+ * @property tile {object} Tiling system for the mouse pointer.
+ * @property tile.center {sprite} Tile currently under the mouse pointer (when selected mode is on).
+ * @property mouse {object} Phaser input object.
  *
- * @property sprite.tile {object} Empty object that, on direction initialization, will be populated.
- * @property sprite.tile.center {sprite} Center tile.
- * @property sprite.tile.top {sprite} Tile to the relative top.
- * @property sprite.tile.left {sprite} Tile to the relative left.
- * @property sprite.tile.bottom {sprite} Tile to the relative bottom.
- * @property sprite.tile.right {sprite} Tile to the relative right.
- *
- * @property map {Map} This game's Map object.
- * @property row {number} Current tile row.
- * @property col {number} Current tile number.
- *
- * @class {object} Player
- * @this Player
+ * @class {object} Mouse
+ * @this Mouse
  * @constructor
- *
- * @see Animal
- * @see direction
- * @see globals
  */
 
-function Player (game, row, col, keys, group, map) {
+function Mouse (game, map, group) {
     
-    this.type = "player";
-    this.map = map;
-
-    var x = row * this.map.tileSize,
-        y = col * this.map.tileSize;
-
     this.game = game;
-    this.keys = keys;
-
-    // initialize the isosprite and set the game's anchor
-    this.sprite = this.game.add.isoSprite(x, y, 0, keys[0], null, group);
-    this.sprite.anchor.set(...globals.anchor);
-    this.sprite.body.collideWorldBounds = true;
-
-    // camera follows this sprite
-    this.game.camera.follow(this.sprite);
-
-    this.sprite.direction = 0;
-    this.sprite.tile = {};
-
-    this.game.physics.isoArcade.enable(this.sprite);
-    this.sprite.body.bounce = new Phaser.Plugin.Isometric.Point3(0.5, 0.5, 0.5);
-
-    // initialize direction
-    direction(this);
+    this.map = map;
+    this.group = group;
+    this.pos = new Phaser.Plugin.Isometric.Point3();
+    
+    var x = this.game.input.mousePointer.x,
+        y = this.game.input.mousePointer.y;
+    
+    this.twoD = new Phaser.Point(x, y);
+    this.threeD = this.game.iso.unproject(this.twoD, this.pos);
+    
+    this.switch = false;
+    
+    this.tile = {};
+    
+    this.mouse = this.game.input;
 }
 
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Tracks the 3x3 vision radius of the Player, and changes tiles within that radius to "discovered".
+ * @desc Updates 2d (twoD) and 3d (threeD) positions as well as world boundaries.
  *
- * @this Player
+ * @property twoD.x {number} 2d x position.
+ * @property twoD.y {number} 2d y position.
+ * @property threeD.x {number} 3d x position.
+ * @property threeD.y {number} 3d y position.
+ * @property inBounds {boolean} Is the mouse pointer within the world boundaries?
+ *
+ * @this Mouse
  */
 
-Player.prototype.visionRadius = function () {
+Mouse.prototype.update = function () {
+    
+    this.twoD.x = this.game.input.mousePointer.x;
+    this.twoD.y = this.game.input.mousePointer.y;
+    this.threeD = this.game.iso.unproject(this.twoD, this.pos);
+    
+    var backX = this.game.physics.isoArcade.bounds.backX,
+        backY = this.game.physics.isoArcade.bounds.backY,
+        frontX = this.game.physics.isoArcade.bounds.frontX,
+        frontY = this.game.physics.isoArcade.bounds.frontY;
+    
+    this.inBounds = (this.threeD.x > backX &amp;&amp; this.threeD.x &lt; frontX) &amp;&amp; (this.threeD.y > backY &amp;&amp; this.threeD.y &lt; frontY);
+};
 
-    var i,
-        j,
-        tile = {},
-        row = this.sprite.row,
-        col = this.sprite.col;
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc If the mouse is in selected mode (i.e. &lt;code>switch&lt;/code> is true), this determines the tile to animate.
+ *
+ * @this Mouse
+ */
 
-    for (i = row - 1; i &lt; row + 2; i++) {
-        for (j = col - 1; j &lt; col + 2; j++) {
-            tile = this.map.tileMap[i][j];
-            tile.tint = 0xFFFFFF;
-            tile.discovered = true;
-        }
+Mouse.prototype.selected = function () {
+    
+    if (this.inBounds) {
+        
+        this.group.forEach((tile) => {
+            
+            if (tile.type === "tile") {
+                var inside = tile.isoBounds.containsXY(this.threeD.x + this.map.tileSize, this.threeD.y + this.map.tileSize);
+                
+                if (inside) {
+                    
+                    this.tile = tile;
+                    
+                    this.row = this.tile.row;
+                    this.col = this.tile.col;
+                    
+                    tile.tint = 0x98FB98;
+                    tile.alpha = 1.3 + Math.sin(this.game.time.now * 0.007);
+                    
+                    this.tween = this.game.add.tween(tile).to({isoZ: 5}, 20, Phaser.Easing.Linear.None, true);
+                    this.tweened = true;
+                } else {
+                    
+                    if (this.tweened) {
+                        this.tween.stop();
+                        this.tweened = !this.tweened;
+                        tile.isoZ = 0;
+                    }
+                    tile.discovered ? tile.tint = 0xFFFFFF : tile.tint = 0x571F57;
+                    tile.alpha = 1;
+                }
+            }
+        });
+    } else {
+        this.reset();
     }
 };
 
-Player.prototype.float = function () {
 
-    this.sprite.isoZ = 5 + Math.sin(this.game.time.now * 0.005);
-};</code></pre>
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Resets all tile sprites in the group.
+ *
+ * @this Mouse
+ */
+
+Mouse.prototype.reset = function () {
+    
+    this.group.forEach((tile) => {
+        
+        if (tile.type === "tile") {
+            tile.discovered ? tile.tint = 0xFFFFFF : tile.tint = 0x571F57;
+            tile.alpha = 1;
+            tile.isoZ = 0;
+            this.game.canvas.style.cursor = "default";
+        }
+    });
+};
+</code></pre>
         </article>
     </section>
 
