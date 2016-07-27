@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>world/item.js - Documentation</title>
+    <title>world/menu/guide.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -28,7 +28,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">world/item.js</h1>
+    <h1 class="page-title">world/menu/guide.js</h1>
     
 
     
@@ -38,90 +38,73 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Created by apizzimenti on 6/8/16.
- */
-
-"use strict";
-
+            <pre class="prettyprint source linenums"><code>(function () {"use strict";})();
 /**
- * @author Anthony Pizzimenti
- *
- * @desc Abstract parent class for Inventory items.
- *
- * @param game {object} Current Phaser game instance.
- * @param key {string} Cached Phaser texture or image.
- * @param inventory {Inventory} Game's Inventory.
- *
- * @property game {object} Phaser game instance.
- * @property key {string} The key that belongs to this Item.
- * @property keys {string[]} Dummy property that can be overwritten.
- * @property map {Map} Game's Map object.
- * @property inventory {Inventory} This game's inventory.
- * @property text {object} When the item is loaded into the inventory, this prop is populated with a Phaser.Text object.
- * @property inventorySprite {sprite} On initialization, this will contain a regular Phaser sprite.
- * @property sprite {sprite} On selected, this will contain an isometric Sprite.
- * @property sprite.tile {object} Contains location and directional information for the sprite.
- * @property direction {number} This sprite's default direction.
- *
- * @class {object} Item
- * @this Item
+ * Created by apizzimenti on 7/21/16.
  */
 
-function Item (game, key, inventory) {
-
-    this.keys = [key, key, key, key];
+function Guide (element, gameElement) {
     
-    this.game = game;
-    this.key = key;
+    this.raw = {};
+    this.raw.guide = document.getElementById(element);
+    this.raw.game = document.getElementById(gameElement);
+    this.raw.canvas = this.raw.game.getElementsByTagName("canvas")[0];
+    this.raw.guideHtml = this.raw.guide.innerHTML;
+    this.raw.offsetTop = this.raw.canvas.offsetTop;
+    this.raw.offsetLeft = this.raw.canvas.offsetLeft;
+    this.raw.on = false;
     
-    this.inventory = inventory;
-    this.text = {};
-
-    this.inventorySprite = {};
-    this.sprite = {};
-    this.sprite.tile = {};
-    this.sprite.direction = 0;
-    this.map = this.inventory.map;
-
+    $(document).ready(() => {
+        this.guideElement = $(`#${element}`);
+        this.guideElement.css("display", "none");
+        
+        this.button();
+    });
 }
 
-
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Default action method. Can and should be overwritten on a per-item basis.
- *
- * @this Item
- */
-
-Item.prototype.action = function () {
-    console.log(`NoActionMethod: ${this.key} is using the builtin action method`);
-};
-
-
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Initializes objects for the isometric physics system. Sprites are immovable.
- *
- * @this Item
- */
-
-Item.prototype.threeDInitialize = function () {
-
-    this.sprite.anchor.set(...globals.anchor);
-    this.sprite.body.collideWorldBounds = true;
-    this.game.physics.isoArcade.enable(this.sprite);
-    this.sprite.enableBody = true;
-
-    this.sprite.tile = {};
-    this.sprite.direction = 0;
-
-    this.sprite.body.immovable = true;
+Guide.prototype.button = function () {
     
-    this.setting = true;
-    direction(this);
+    var button = document.createElement("button"),
+        buttonText = document.createTextNode("i"),
+        id = "guideButton",
+        template = `#${id}`;
+    
+    button.id = id;
+    button.appendChild(buttonText);
+    this.raw.game.appendChild(button);
+    this.raw.guideButton = button;
+        
+    $(template).css({
+        "position": "absolute",
+        "top": this.raw.offsetTop + 20,
+        "left": this.raw.offsetLeft + 20,
+        "background-color": "transparent",
+        "color": "#FFF",
+        "border": "none",
+        "font-family": "Courier",
+        "font-size": "20px"
+    });
+    
+    $(template).hover(() => {
+       $(template).css({
+           "cursor": "pointer"
+       });
+    });
+    
+    $(template).click(() => {
+        
+        $(template).css({
+            "outline": "none"
+        });
+        
+        if (!this.raw.on) {
+            $(template).append(this.raw.guideHtml);
+            this.raw.on = true;
+        } else {
+            $(template).empty();
+            this.raw.on = false;
+        }
+    });
 };
 </code></pre>
         </article>
