@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>physics/bounds.js - Documentation</title>
+    <title>Guide - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -28,74 +28,311 @@
 
 <div id="main">
     
-    <h1 class="page-title">physics/bounds.js</h1>
+    <h1 class="page-title">Guide</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>(function () {"use strict";})();
-/**
- * Created by apizzimenti on 6/29/16.
- */
+        <h2>
+        Guide
+        </h2>
+        
+            <div class="class-description">Animal</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="Guide"><span class="type-signature"></span>new Guide<span class="signature">(element, gameElement)</span><span class="type-signature"></span></h4>
+
+    
 
 
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Determines whether the immediate top, left, bottom, and right tiles are blocked.
- *
- * @param context {object} The context in which a sprite object exists.
- *
- * @returns {object} Each property specifies if the immediate top, left, bottom, right, or none of the previous tiles are blocked.
- *
- * @see Animal
- * @see Player
- */
 
-function determineBounds (context) {
-
-    var sprite = context.sprite,
-        bounds = {};
-
-    sprite.tile.top.blocked ? bounds.top = true : bounds.top = false;
-    sprite.tile.left.blocked ? bounds.left = true : bounds.left = false;
-    sprite.tile.bottom.blocked  ? bounds.bottom = true : bounds.bottom = false;
-    sprite.tile.right.blocked ? bounds.right = true : bounds.right = false;
-
-    bounds.allBounds = bounds.top || bounds.left || bounds.bottom || bounds.right;
-
-    return bounds;
-}
+<div class="description">
+    Element for containing how-to information and making it visible (or invisible) to the player.
+</div>
 
 
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Checks to see whether the location of the mouse is within physics world bounds.
- *
- * @param Mouse {Mouse} Mouse object to check.
- *
- * @returns {boolean} Is this location within the physics world bounds?
- */
 
-function isInBounds (Mouse) {
 
-    var x = Mouse.threeD.x,
-        y = Mouse.threeD.y,
-        game = Mouse.game,
-        inX = x > game.physics.isoArcade.bounds.backX &amp;&amp; x &lt; game.physics.isoArcade.bounds.frontX,
-        inY = y > game.physics.isoArcade.bounds.backY &amp;&amp; y &lt; game.physics.isoArcade.bounds.frontY;
 
-    return inX &amp;&amp; inY;
-}
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">String id for the HTML element that will serve as your guide (typically a button).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gameElement</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">String id for element that hosts the game canvas (the same name as when the Phaser game is initialized).</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Anthony Pizzimenti</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="world_menu_guide.js.html">world/menu/guide.js</a>, <a href="world_menu_guide.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="button"><span class="type-signature"></span>button<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Generates a button on top of the game canvas for displaying help information.
+</div>
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <ul><li><a href="Guide.html">Guide</a></li></ul>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Anthony Pizzimenti</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="world_menu_guide.js.html">world/menu/guide.js</a>, <a href="world_menu_guide.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
