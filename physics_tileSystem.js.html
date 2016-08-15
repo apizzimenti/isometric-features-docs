@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Animal.html">Animal</a><ul class='methods'><li data-type='method'><a href="Animal.html#isVisible">isVisible</a></li><li data-type='method'><a href="Animal.html#listen">listen</a></li><li data-type='method'><a href="Animal.html#timedMovement">timedMovement</a></li></ul></li><li><a href="ContextMenu.html">ContextMenu</a><ul class='methods'><li data-type='method'><a href="ContextMenu.html#createContextMenu">createContextMenu</a></li></ul></li><li><a href="Debug.html">Debug</a><ul class='methods'><li data-type='method'><a href="Debug.html#fps">fps</a></li><li data-type='method'><a href="Debug.html#mousePos">mousePos</a></li><li data-type='method'><a href="Debug.html#sprite">sprite</a></li><li data-type='method'><a href="Debug.html#switch">switch</a></li><li data-type='method'><a href="Debug.html#tiles">tiles</a></li></ul></li><li><a href="Guide.html">Guide</a></li><li><a href="Inventory.html">Inventory</a><ul class='methods'><li data-type='method'><a href="Inventory.html#addItem">addItem</a></li><li data-type='method'><a href="Inventory.html#addItems">addItems</a></li></ul></li><li><a href="Item.html">Item</a><ul class='methods'><li data-type='method'><a href="Item.html#action">action</a></li><li data-type='method'><a href="Item.html#threeDInitialize">threeDInitialize</a></li></ul></li><li><a href="Map.html">Map</a></li><li><a href="Message.html">Message</a><ul class='methods'><li data-type='method'><a href="Message.html#add">add</a></li></ul></li><li><a href="Mouse.html">Mouse</a><ul class='methods'><li data-type='method'><a href="Mouse.html#reset">reset</a></li><li data-type='method'><a href="Mouse.html#selected">selected</a></li><li data-type='method'><a href="Mouse.html#update">update</a></li></ul></li><li><a href="Player.html">Player</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAnimals">createAnimals</a></li><li><a href="global.html#determineBounds">determineBounds</a></li><li><a href="global.html#determineDirections">determineDirections</a></li><li><a href="global.html#determineTileRadius">determineTileRadius</a></li><li><a href="global.html#dim">dim</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#globals">globals</a></li><li><a href="global.html#isInBounds">isInBounds</a></li><li><a href="global.html#keymap">keymap</a></li><li><a href="global.html#keymapTrack">keymapTrack</a></li><li><a href="global.html#manipulateDirection">manipulateDirection</a></li><li><a href="global.html#resetSprite">resetSprite</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Animal.html">Animal</a><ul class='methods'><li data-type='method'><a href="Animal.html#isVisible">isVisible</a></li><li data-type='method'><a href="Animal.html#listen">listen</a></li><li data-type='method'><a href="Animal.html#timedMovement">timedMovement</a></li></ul></li><li><a href="ContextMenu.html">ContextMenu</a><ul class='methods'><li data-type='method'><a href="ContextMenu.html#createContextMenu">createContextMenu</a></li></ul></li><li><a href="Debug.html">Debug</a><ul class='methods'><li data-type='method'><a href="Debug.html#fps">fps</a></li><li data-type='method'><a href="Debug.html#mousePos">mousePos</a></li><li data-type='method'><a href="Debug.html#sprite">sprite</a></li><li data-type='method'><a href="Debug.html#switch">switch</a></li><li data-type='method'><a href="Debug.html#tiles">tiles</a></li></ul></li><li><a href="Guide.html">Guide</a></li><li><a href="Inventory.html">Inventory</a><ul class='methods'><li data-type='method'><a href="Inventory.html#addItem">addItem</a></li><li data-type='method'><a href="Inventory.html#addItems">addItems</a></li></ul></li><li><a href="Item.html">Item</a><ul class='methods'><li data-type='method'><a href="Item.html#action">action</a></li><li data-type='method'><a href="Item.html#threeDInitialize">threeDInitialize</a></li></ul></li><li><a href="Map.html">Map</a></li><li><a href="Message.html">Message</a><ul class='methods'><li data-type='method'><a href="Message.html#add">add</a></li></ul></li><li><a href="Mouse.html">Mouse</a><ul class='methods'><li data-type='method'><a href="Mouse.html#reset">reset</a></li><li data-type='method'><a href="Mouse.html#selected">selected</a></li><li data-type='method'><a href="Mouse.html#update">update</a></li></ul></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method'><a href="Player.html#addIntro">addIntro</a></li><li data-type='method'><a href="Player.html#create">create</a></li><li data-type='method'><a href="Player.html#visionRadius">visionRadius</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#createAnimals">createAnimals</a></li><li><a href="global.html#determineBounds">determineBounds</a></li><li><a href="global.html#determineDirections">determineDirections</a></li><li><a href="global.html#determineTileRadius">determineTileRadius</a></li><li><a href="global.html#dim">dim</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#Globals">Globals</a></li><li><a href="global.html#isInBounds">isInBounds</a></li><li><a href="global.html#keymap">keymap</a></li><li><a href="global.html#keymapTrack">keymapTrack</a></li><li><a href="global.html#manipulateDirection">manipulateDirection</a></li><li><a href="global.html#resetSprite">resetSprite</a></li></ul>
 </nav>
 
 <div id="main">
@@ -58,16 +58,35 @@
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Computes the direction and cross boundaries for the given sprite.
+ * @desc If the Sprite is auto-loaded, analyze direction; otherwise, wait.
  *
- * @param Sprite {Animal | Player | Item} Object containing a Phaser sprite.
+ * @param Sprite {Animal | Player | Item} Object containing a Phaser isometric sprite.
  *
  * @see Animal
  * @see Player
+ * @see Item
  */
 
 function direction (Sprite) {
+    
+    if (Sprite.auto) {
+        _assignDirection(Sprite);
+    }
+}
 
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Computes the current direction of the given Sprite.
+ *
+ * @param Sprite {Animal | Player | Item} Object containing a Phaser isometric sprite.
+ *
+ * @private
+ */
+
+function _assignDirection (Sprite) {
+    
     var sprite = Sprite.sprite,
         x = sprite.body.frontX,
         y = sprite.body.frontY,
@@ -82,7 +101,7 @@ function direction (Sprite) {
         rm = r.m,
         cp = c.p,
         cm = c.m;
-
+    
     sprite.row = row;
     sprite.col = col;
     
@@ -94,36 +113,36 @@ function direction (Sprite) {
             sprite.tile.left = tileMap[row][cm];
             sprite.tile.right = tileMap[row][cp];
             sprite.tile.bottom = tileMap[rm][col];
-
+            
             break;
-
+        
         case 1:
             sprite.tile.top = tileMap[row][cm];
             sprite.tile.left = tileMap[rm][col];
             sprite.tile.right = tileMap[rp][col];
             sprite.tile.bottom = tileMap[row][cp];
-
+            
             break;
-
+        
         case 2:
             sprite.tile.top = tileMap[rm][col];
             sprite.tile.left = tileMap[row][cp];
             sprite.tile.right = tileMap[row][cm];
             sprite.tile.bottom = tileMap[rp][col];
-
+            
             break;
-
+        
         case 3:
             sprite.tile.top = tileMap[row][cp];
             sprite.tile.left = tileMap[rp][col];
             sprite.tile.right = tileMap[rm][col];
             sprite.tile.bottom = tileMap[row][cm];
-
+            
             break;
     }
     
     sprite.loadTexture(Sprite.keys[dir]);
-
+    
 }
 
 
@@ -261,7 +280,7 @@ function resetSprite (sprite, body) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Aug 12 2016 11:52:41 GMT-0500 (CDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Aug 15 2016 13:43:17 GMT-0500 (CDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
