@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ContextMenu</title>
+    <title>JSDoc: Class: Globals</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ContextMenu</h1>
+    <h1 class="page-title">Class: Globals</h1>
 
     
 
@@ -28,9 +28,7 @@
 
 <header>
     
-        <h2>ContextMenu</h2>
-        
-            <div class="class-description">{object} contextMenu</div>
+        <h2>Globals</h2>
         
     
 </header>
@@ -41,17 +39,15 @@
         
 
     
-    <h2>Constructor</h2>
-    
 
-    <h4 class="name" id="ContextMenu"><span class="type-signature"></span>new ContextMenu<span class="signature">(Inventory)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Globals"><span class="type-signature"></span>new Globals<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Controls context menus and options.
+    A set of variables that have to be used in disparate locations. All methods are static.
 </div>
 
 
@@ -60,58 +56,6 @@
 
 
 
-    <h5>This:</h5>
-    <ul><li>contextMenu</li></ul>
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Inventory</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Inventory.html">Inventory</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Inventory object.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -144,13 +88,13 @@
 
         <tr>
             
-                <td class="name"><code>Inventory</code></td>
+                <td class="name"><code>anchor</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="Inventory.html">Inventory</a></span>
+<span class="param-type">Array.&lt;number></span>
 
 
             
@@ -160,20 +104,20 @@
 
             
 
-            <td class="description last">Inventory object.</td>
+            <td class="description last">Globalized anchor for all sprites.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>game</code></td>
+                <td class="name"><code>mapTileKey</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Array.&lt;string></span>
 
 
             
@@ -183,20 +127,20 @@
 
             
 
-            <td class="description last">Current game instance.</td>
+            <td class="description last">Will contain keys for tile sprites.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>mouse</code></td>
+                <td class="name"><code>tween</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="Mouse.html">Mouse</a></span>
+<span class="param-type">array</span>
 
 
             
@@ -206,20 +150,20 @@
 
             
 
-            <td class="description last">Mouse object.</td>
+            <td class="description last">Default tween settings.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>items</code></td>
+                <td class="name"><code>paramNotExist</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;sprite></span>
+<span class="param-type">function</span>
 
 
             
@@ -229,7 +173,30 @@
 
             
 
-            <td class="description last">List of items currently in the Inventory.</td>
+            <td class="description last">Global testing method for parameters.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>colorTween</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Tweens the color of the input object.</td>
         </tr>
 
     
@@ -275,7 +242,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="world_menu_ContextMenu.js.html">world/menu/ContextMenu.js</a>, <a href="world_menu_ContextMenu.js.html#line24">line 24</a>
+        <a href="tools_Globals.js.html">tools/Globals.js</a>, <a href="tools_Globals.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -316,109 +283,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="createContextMenu"><span class="type-signature"></span>createContextMenu<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Creates a context menu at the current x, y position.
-</div>
-
-
-
-
-
-
-
-    <h5>This:</h5>
-    <ul><li>contextMenu</li></ul>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Anthony Pizzimenti</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="world_menu_ContextMenu.js.html">world/menu/ContextMenu.js</a>, <a href="world_menu_ContextMenu.js.html#line42">line 42</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>Accept actions param which provides {key => value} pairs that describe actions and provide callbacks</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
     
 
     
