@@ -236,6 +236,29 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>colorTween</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -278,7 +301,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools_Globals.js.html">tools/Globals.js</a>, <a href="tools_Globals.js.html#line20">line 20</a>
+        <a href="tools_Globals.js.html">tools/Globals.js</a>, <a href="tools_Globals.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -550,7 +573,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="world_Animal.js.html">world/Animal.js</a>, <a href="world_Animal.js.html#line291">line 291</a>
+        <a href="world_Animal.js.html">world/Animal.js</a>, <a href="world_Animal.js.html#line316">line 316</a>
     </li></ul></dd>
     
 
@@ -717,7 +740,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="physics_bounds.js.html">physics/bounds.js</a>, <a href="physics_bounds.js.html#line20">line 20</a>
+        <a href="physics_Bounds.js.html">physics/Bounds.js</a>, <a href="physics_Bounds.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -765,166 +788,6 @@
     <dd>
         
 <span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="determineDirections"><span class="type-signature"></span>determineDirections<span class="signature">(path)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Determines the directional values for a sprite based on a set of path instructions.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;object></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Array of coordinate objects.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Anthony Pizzimenti</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="physics_tileSystem.js.html">physics/tileSystem.js</a>, <a href="physics_tileSystem.js.html#line185">line 185</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The directions, in succession, that the sprite will be facing on this path.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;number></span>
 
 
     </dd>
@@ -1069,7 +932,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="physics_tileSystem.js.html">physics/tileSystem.js</a>, <a href="physics_tileSystem.js.html#line120">line 120</a>
+        <a href="physics_Tiles.js.html">physics/Tiles.js</a>, <a href="physics_Tiles.js.html#line135">line 135</a>
     </li></ul></dd>
     
 
@@ -1275,7 +1138,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="physics_bounds.js.html">physics/bounds.js</a>, <a href="physics_bounds.js.html#line72">line 72</a>
+        <a href="physics_Bounds.js.html">physics/Bounds.js</a>, <a href="physics_Bounds.js.html#line72">line 72</a>
     </li></ul></dd>
     
 
@@ -1444,7 +1307,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="physics_tileSystem.js.html">physics/tileSystem.js</a>, <a href="physics_tileSystem.js.html#line30">line 30</a>
+        <a href="physics_Tiles.js.html">physics/Tiles.js</a>, <a href="physics_Tiles.js.html#line30">line 30</a>
     </li></ul></dd>
     
 
@@ -1461,6 +1324,170 @@
             <li><a href="Item.html">Item</a></li>
         </ul>
     </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="forceDirection"><span class="type-signature"></span>forceDirection<span class="signature">(sprite, direction)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Takes in a sprite and a direction number, and sets the velocity accordingly.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sprite</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Player.html">Player</a></span>
+|
+
+<span class="param-type"><a href="Animal.html">Animal</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Sprite's parent.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>direction</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Direction.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Anthony Pizzimenti</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="physics_Tiles.js.html">physics/Tiles.js</a>, <a href="physics_Tiles.js.html#line153">line 153</a>
+    </li></ul></dd>
+    
+
+    
+
     
 
     
@@ -1593,7 +1620,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="physics_bounds.js.html">physics/bounds.js</a>, <a href="physics_bounds.js.html#line46">line 46</a>
+        <a href="physics_Bounds.js.html">physics/Bounds.js</a>, <a href="physics_Bounds.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -1638,492 +1665,6 @@
 </dl>
 
     
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="keymap"><span class="type-signature"></span>keymap<span class="signature">(game, context)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Binds the left, right, up, and down keys to the running game instance.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>game</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Phaser game instance.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>context</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the context game is bound to.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Anthony Pizzimenti</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools_System.js.html">tools/System.js</a>, <a href="tools_System.js.html#line15">line 15</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="keymapTrack"><span class="type-signature"></span>keymapTrack<span class="signature">(Player, context)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Changes the direction of the given sprite based on keypresses.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Player</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Player.html">Player</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Phaser Player sprite.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>context</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the context game is bound to.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Anthony Pizzimenti</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools_System.js.html">tools/System.js</a>, <a href="tools_System.js.html#line41">line 41</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="manipulateDirection"><span class="type-signature"></span>manipulateDirection<span class="signature">(sprite, d)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Takes in a sprite and a direction number, and sets the velocity accordingly.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>sprite</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Player.html">Player</a></span>
-|
-
-<span class="param-type"><a href="Animal.html">Animal</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Sprite's parent.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>d</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Randomized direction.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Anthony Pizzimenti</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="physics_tileSystem.js.html">physics/tileSystem.js</a>, <a href="physics_tileSystem.js.html#line138">line 138</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2265,7 +1806,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="physics_tileSystem.js.html">physics/tileSystem.js</a>, <a href="physics_tileSystem.js.html#line223">line 223</a>
+        <a href="physics_Tiles.js.html">physics/Tiles.js</a>, <a href="physics_Tiles.js.html#line241">line 241</a>
     </li></ul></dd>
     
 
@@ -2292,6 +1833,166 @@
 
 
         
+            
+
+    
+
+    <h4 class="name" id="shrinkPath"><span class="type-signature"></span>shrinkPath<span class="signature">(path)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Determines the directional values for a sprite based on a set of path instructions.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of coordinate objects.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Anthony Pizzimenti</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="physics_Tiles.js.html">physics/Tiles.js</a>, <a href="physics_Tiles.js.html#line201">line 201</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The directions, in succession, that the sprite will be facing on this path.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;number></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
     
 
     
@@ -2307,13 +2008,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Animal.html">Animal</a></li><li><a href="ContextMenu.html">ContextMenu</a></li><li><a href="Debug.html">Debug</a></li><li><a href="Guide.html">Guide</a></li><li><a href="Inventory.html">Inventory</a></li><li><a href="Item.html">Item</a></li><li><a href="Map.html">Map</a></li><li><a href="Message.html">Message</a></li><li><a href="Mouse.html">Mouse</a></li><li><a href="Player.html">Player</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAnimals">createAnimals</a></li><li><a href="global.html#determineBounds">determineBounds</a></li><li><a href="global.html#determineDirections">determineDirections</a></li><li><a href="global.html#determineTileRadius">determineTileRadius</a></li><li><a href="global.html#dim">dim</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#Globals">Globals</a></li><li><a href="global.html#isInBounds">isInBounds</a></li><li><a href="global.html#keymap">keymap</a></li><li><a href="global.html#keymapTrack">keymapTrack</a></li><li><a href="global.html#manipulateDirection">manipulateDirection</a></li><li><a href="global.html#resetSprite">resetSprite</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Animal.html">Animal</a></li><li><a href="ContextMenu.html">ContextMenu</a></li><li><a href="Debug.html">Debug</a></li><li><a href="Guide.html">Guide</a></li><li><a href="Inventory.html">Inventory</a></li><li><a href="Item.html">Item</a></li><li><a href="Map.html">Map</a></li><li><a href="Message.html">Message</a></li><li><a href="Mouse.html">Mouse</a></li><li><a href="Player.html">Player</a></li><li><a href="System.html">System</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAnimals">createAnimals</a></li><li><a href="global.html#determineBounds">determineBounds</a></li><li><a href="global.html#determineTileRadius">determineTileRadius</a></li><li><a href="global.html#dim">dim</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#forceDirection">forceDirection</a></li><li><a href="global.html#Globals">Globals</a></li><li><a href="global.html#isInBounds">isInBounds</a></li><li><a href="global.html#resetSprite">resetSprite</a></li><li><a href="global.html#shrinkPath">shrinkPath</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon Nov 14 2016 12:30:33 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 11:32:27 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -89,26 +89,39 @@ function Inventory (game, map, mouse, escape, itemGroup, messagePos) {
 
     this.itemCache = {};
 
+        // create graphics object
     var graphics = game.add.graphics(0, 0),
         menuGroup = game.add.group(),
+
+        // dedicated widths and heights for item content
         areaWidth = 260,
         areaHeight = 300,
         elementWidth = 65,
         elementHeight = 60;
 
+    // fix everything to camera
     menuGroup.fixedToCamera = true;
+
     menuGroup.enableBody = true;
     this.menuGroup = menuGroup;
     this.itemGroup = itemGroup;
 
+    // fix graphics to camera
     graphics.fixedToCamera = true;
+
+    // assign styles for lines and fill
     graphics.lineStyle(2, 0xFF0000, 0.5);
     graphics.beginFill(0xFF0000, 0.3);
+
+    // draw inventory shape
     graphics.drawRect(this.width - areaWidth, this.height - areaHeight, areaWidth, areaHeight);
+
     this.graphics = graphics;
 
+    // create a linked list to hold items
     this.itemList = new f.LinkedList([]);
 
+    // create area and element objects to store widths and heights
     this.area = {};
     this.area.width = areaWidth;
     this.area.height = areaHeight;
@@ -119,9 +132,11 @@ function Inventory (game, map, mouse, escape, itemGroup, messagePos) {
 
     window.graphics = graphics;
 
+    // create new message dispatcher
     this.messages = new Message(this.game, 14, messagePos);
     this.contextMenu = new ContextMenu(this);
 
+    // click event handler
     this._onClick();
 }
 
@@ -143,6 +158,8 @@ Inventory.prototype._refit = function () {
     this.menuGroup.removeAll(true);
 
     var perRow = this.area.width / this.element.width,
+
+        // group items by number of rows
         items = f.group(this.itemList.toArray(), perRow),
 
         item,
@@ -205,7 +222,7 @@ Inventory.prototype._refit = function () {
 Inventory.prototype.addItems = function (items) {
 
     if (!Array.isArray(items)) {
-        throw new Error("Use addItem(item) for single items.");
+        console.warn("Use Inventory.addItem(item) for single items.");
     } else {
         items.forEach((item) => {
             this.addItem(item);
@@ -230,13 +247,18 @@ Inventory.prototype.addItems = function (items) {
 Inventory.prototype._onClick = function () {
     
     this.game.input.onDown.add(() => {
+
+        // if the user has selected an item
         if (this.mouse.switch) {
+            // place it on the map
             this._placeItem();
         } else {
+            // otherwise, let _click() handle it
             this._click();
         }
     });
 
+    // if the user escapes, reset everything
     this.escape.onDown.add(() => {
         this.mouse.switch = false;
         this.mouse.reset();
@@ -258,36 +280,48 @@ Inventory.prototype._click = function () {
 
     var _this = this;
 
+    // create context menu
     this.game.canvas.oncontextmenu = function (e) {
         e.preventDefault();
         _this.contextMenu.createContextMenu();
     };
 
+        // calculate the (x, y) coordinates of the inventory box location
     var cornerX = this.width - this.area.width,
         cornerY = this.height - this.area.height,
+
+        // calculate corner bounds for mouse location
         relativeX = this.mouse.twoD.x - cornerX,
         relativeY = this.mouse.twoD.y - cornerY;
 
     if (this.mouse.twoD.x > cornerX &amp;&amp; this.mouse.twoD.y > cornerY) {
 
+            // get correct row, column, and position on map
         var col = Math.floor(relativeX / this.element.width),
             row = Math.floor(relativeY / this.element.height),
             loc = col + (row > 0 ? row * (this.area.height / this.element.height) - 1 : 0),
 
             item,
+
+            // get items from linked list
             items = this.itemList.toArray();
 
+        // if an item exists at the location that was clicked
         if (items[loc]) {
 
             item = items[loc];
 
+            // if there is an item that has already been selected, reset it
             if (this.currentItem) {
                 this.currentItem.inventorySprite.tint = 0xFFFFFF;
                 this.currentItem.inventorySprite.clicked = false;
                 this.currentItem.inventorySprite.useHandCursor = true;
             }
 
+            // turn the mouse selection on
             this.mouse.switch = true;
+
+            // set clicked and change tints
             item.inventorySprite.clicked = true;
             item.inventorySprite.tint = 0xFFDD00;
             item.text.tint = 0xFFDD00;
@@ -314,6 +348,8 @@ Inventory.prototype._reset = function () {
     this.menuGroup.forEach((item) => {
         item.input.useHandCursor = true;
         item.tint = 0xFFFFFF;
+
+        // retrieve items from object cache
         this.itemCache[item.key].text.tint = 0xFFFFFF;
 
         if (item.clicked) {
@@ -335,27 +371,42 @@ Inventory.prototype._reset = function () {
 
 Inventory.prototype._placeItem = function () {
 
+        // get size of the tiles in the map
     var tileSize = this.mouse.map.tileSize,
+
+        // calculate the position of the mouse relative to the map
         x = this.mouse.threeD.x - (this.mouse.threeD.x % tileSize),
         y = this.mouse.threeD.y - (this.mouse.threeD.y % tileSize),
+
         item = this.currentItem,
         key = item.key,
         tile = this.mouse.tile,
         message = `Sorry, you can't place the ${key} there. Choose a place that you've already seen!`;
 
+    // if the selected tile is discovered and the mouse is in bounds
     if (tile.discovered &amp;&amp; isInBounds(this.mouse)) {
 
+        // add the isometric sprite to the map
         item.sprite = this.game.add.isoSprite(x, y, 0, key, null, this.itemGroup);
+
+        // initialize the item
         item.threeDInitialize();
 
+        // call the item's action (if there is none, a console warning is thrown)
         item.action();
+
+        // destroy the item body and text in the inventory
         item.inventorySprite.destroy();
         item.text.destroy();
 
+        // remove the item from the item list
         this.itemList.remove(this.currentItem.location);
+
+        // reset the mouse
         this.mouse.reset();
         this.mouse.switch = false;
 
+        // refit all the items
         this._refit();
 
     } else {
@@ -372,13 +423,13 @@ Inventory.prototype._placeItem = function () {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Animal.html">Animal</a></li><li><a href="ContextMenu.html">ContextMenu</a></li><li><a href="Debug.html">Debug</a></li><li><a href="Guide.html">Guide</a></li><li><a href="Inventory.html">Inventory</a></li><li><a href="Item.html">Item</a></li><li><a href="Map.html">Map</a></li><li><a href="Message.html">Message</a></li><li><a href="Mouse.html">Mouse</a></li><li><a href="Player.html">Player</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAnimals">createAnimals</a></li><li><a href="global.html#determineBounds">determineBounds</a></li><li><a href="global.html#determineDirections">determineDirections</a></li><li><a href="global.html#determineTileRadius">determineTileRadius</a></li><li><a href="global.html#dim">dim</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#Globals">Globals</a></li><li><a href="global.html#isInBounds">isInBounds</a></li><li><a href="global.html#keymap">keymap</a></li><li><a href="global.html#keymapTrack">keymapTrack</a></li><li><a href="global.html#manipulateDirection">manipulateDirection</a></li><li><a href="global.html#resetSprite">resetSprite</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Animal.html">Animal</a></li><li><a href="ContextMenu.html">ContextMenu</a></li><li><a href="Debug.html">Debug</a></li><li><a href="Guide.html">Guide</a></li><li><a href="Inventory.html">Inventory</a></li><li><a href="Item.html">Item</a></li><li><a href="Map.html">Map</a></li><li><a href="Message.html">Message</a></li><li><a href="Mouse.html">Mouse</a></li><li><a href="Player.html">Player</a></li><li><a href="System.html">System</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAnimals">createAnimals</a></li><li><a href="global.html#determineBounds">determineBounds</a></li><li><a href="global.html#determineTileRadius">determineTileRadius</a></li><li><a href="global.html#dim">dim</a></li><li><a href="global.html#direction">direction</a></li><li><a href="global.html#forceDirection">forceDirection</a></li><li><a href="global.html#Globals">Globals</a></li><li><a href="global.html#isInBounds">isInBounds</a></li><li><a href="global.html#resetSprite">resetSprite</a></li><li><a href="global.html#shrinkPath">shrinkPath</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon Nov 14 2016 12:30:33 GMT-0600 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 20 2016 11:32:27 GMT-0600 (CST)
 </footer>
 
 <script> prettyPrint(); </script>
